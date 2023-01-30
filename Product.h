@@ -1,23 +1,17 @@
 #include<iostream>
 #include <string>
-
-struct DateAdded
-{
-	int day;
-	int month;
-	double year;
-};
-
+#include <map>
 class Product
 {
 public:
-	void putInfaile(std::string nameFaile, Product temp);
-	void getInfaile();
-	void listProduct(std::string nameFaile);
-	void getData();
-	bool checkForLetter(std::string express);
-	bool checkDigit(std::string express);
+    void menu();
+	void putInfile();
+	void getnamefile(std::string &namefile);
+	void getdate(Product &temp);
+	//void getInfile();
+	//void listProduct(std::string nameFaile);
+	//bool checkForLetter(std::string express);
+	//bool checkDigit(std::string express);
 private:
-	DateAdded date;
-	std::string typeOfproduct;
+	std::map<std::string, std::string> specific;
 };

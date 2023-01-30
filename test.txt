@@ -1,4 +1,2 @@
-car 2 7 1996
-car 24 5 2000
-abs 2 2 2
-fb -858993460 2 2
+glass:power;kont:15;
+pop:sela;years:1987;

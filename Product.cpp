@@ -2,54 +2,38 @@
 #include <fstream>
 #include <cctype>
 
-void Product::putInfaile(std::string nameFaile, Product temp )
+void Product::putInfile()
 {
+	Product prod;
+	std::string namefile;
 	std::ofstream fin;
-	nameFaile += ".txt";
-	fin.open(nameFaile,std::ios::app | std::ios::ate);
-	fin << temp.typeOfproduct << " " << temp.date.day << " " << temp.date.month << " " << temp.date.year << std::endl;
+	getnamefile(namefile);
+	getdate(prod);
+	std::map<std::string, std::string>::iterator it = prod.specific.begin();
+	fin.open(namefile,std::ios::app | std::ios::ate);
+	for (it ; it != prod.specific.end(); it++)
+	{
+		fin <<it->first << ":" << it->second <<";";
+	}
+	fin << std::endl;
 	fin.close();
+	std::cout << "The recording has passed!" << std::endl;
 }
-void Product::getData()
+void Product::getdate(Product &temp)
 {
-	std::string temp;
-	std::cout <<"Enter type of product: ";
-	std::cin >> typeOfproduct;
-	if (checkForLetter(typeOfproduct))
+	std::string request,first,second;
+	do
 	{
-		std::cout << "Error!Enter type of product incorrect!" << std::endl;
-		exit(1);
-	}
-	std::cout << "Enter day: ";
-	std::cin >> temp;
-	if (!checkDigit(temp))
-		date.day = stoi(temp);
-	else
-	{
-		std::cout << "Error! Enter day is not number!"<<std::endl;
-		exit(1);
-	}
-	std::cout << "Enter month: ";
-	std::cin >> temp;
-	if (!checkDigit(temp))
-		date.day = stoi(temp);
-	else
-	{
-		std::cout << "Error! Enter month is not number!" << std::endl;
-		exit(1);
-	}
-	std::cout << "Enter year: ";
-	std::cin >> temp;
-	if (!checkDigit(temp))
-		date.day = stoi(temp);
-	else
-	{
-		std::cout << "Error! Enter year is not number!" << std::endl;
-		exit(1);
-	}
-	
+		std::cout << "Enter a category:";
+		std::cin >> first;
+		std::cout << "Enter its value:";
+		std::cin >> second;
+		temp.specific[first] = second;
+		std::cout << "Add another category?" << std::endl << "Yes(Y) or Not(N)" <<std::endl;
+		std::cin >> request;
+	} while (request != "N" && request != "n");
 }
-bool Product::checkForLetter(std::string express)
+/*bool Product::checkForLetter(std::string express)
 
 {
 	int size = express.length();
@@ -69,4 +53,33 @@ bool Product::checkDigit(std::string express)
 			return true;
 	}
 	return false;
+}*/
+void Product::menu()
+{
+	std::string request;
+	do
+	{
+		std::cout << "What do you want to do?" << std::endl;
+		std::cout << "Enter the number of the desired action!" << std::endl;
+		std::cout << "1-:Add a new product?" << std::endl;
+		std::cin >> request;
+		switch (request[0])
+		{
+		case '1':
+			putInfile();
+			break;
+		default:
+			std::cout << "The entered value is missing!" << std::endl;
+			break;
+		}
+		std::cout << "Repeat?" << std::endl << "Yes(Y) or Not(N)?" << std::endl;
+		std::cin >> request;
+		std::cout << std::endl << std::endl;
+	} while (request != "N" && request != "n");
+}
+void Product::getnamefile(std::string &namefile)
+{
+	std::cout << "Enter the file name:";
+	std::cin >> namefile;
+	namefile += ".txt";
 }
