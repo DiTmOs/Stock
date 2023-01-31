@@ -1,2 +1,5 @@
 glass:power;kont:15;
 pop:sela;years:1987;
+car:nissan;
+home:Nevskiy;
+dota:6500;pusi:fucking;

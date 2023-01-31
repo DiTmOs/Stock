@@ -1,7 +1,7 @@
-#include "Product.h"
+#include "Menu.h"
 
 void main()
 {
-	Product test;
-	test.menu();
+	Menu start;
+	start.menu();
 }

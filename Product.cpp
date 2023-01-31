@@ -2,16 +2,13 @@
 #include <fstream>
 #include <cctype>
 
-void Product::putInfile()
+void Product::putInfile(std::string namefile)
 {
-	Product prod;
-	std::string namefile;
 	std::ofstream fin;
-	getnamefile(namefile);
-	getdate(prod);
-	std::map<std::string, std::string>::iterator it = prod.specific.begin();
+	getdate();
+	std::map<std::string, std::string>::iterator it = specific.begin();
 	fin.open(namefile,std::ios::app | std::ios::ate);
-	for (it ; it != prod.specific.end(); it++)
+	for (it ; it != specific.end(); it++)
 	{
 		fin <<it->first << ":" << it->second <<";";
 	}
@@ -19,7 +16,7 @@ void Product::putInfile()
 	fin.close();
 	std::cout << "The recording has passed!" << std::endl;
 }
-void Product::getdate(Product &temp)
+void Product::getdate()
 {
 	std::string request,first,second;
 	do
@@ -28,58 +25,51 @@ void Product::getdate(Product &temp)
 		std::cin >> first;
 		std::cout << "Enter its value:";
 		std::cin >> second;
-		temp.specific[first] = second;
-		std::cout << "Add another category?" << std::endl << "Yes(Y) or Not(N)" <<std::endl;
+		specific[first] = second;
+		std::cout << std::endl << "Add another category?" << std::endl << "Yes(Y) or Not(N)" <<std::endl;
 		std::cin >> request;
 	} while (request != "N" && request != "n");
 }
-/*bool Product::checkForLetter(std::string express)
-
+void Product::readline(std::string line)
 {
-	int size = express.length();
-	for (int i = 0; i < size; i++)
+	int n(1);
+	std::string first(""), second("");
+	for (int i = 0; i < line.length(); i++)
 	{
-		if (std::isdigit(express[i]))
-			return true;
-	}
-	return false;
-}
-bool Product::checkDigit(std::string express)
-{
-	int size = express.length();
-	for (int i = 0; i < size; i++)
-	{
-		if (std::isalpha(express[i]))
-			return true;
-	}
-	return false;
-}*/
-void Product::menu()
-{
-	std::string request;
-	do
-	{
-		std::cout << "What do you want to do?" << std::endl;
-		std::cout << "Enter the number of the desired action!" << std::endl;
-		std::cout << "1-:Add a new product?" << std::endl;
-		std::cin >> request;
-		switch (request[0])
+		switch (line[i])
 		{
-		case '1':
-			putInfile();
+		case ':':
+			n = 2;
+			++i;
 			break;
-		default:
-			std::cout << "The entered value is missing!" << std::endl;
+		case ';':
+			n = 1;
+			specific[first] = second;
+			first.clear();
+			second.clear();
+			++i;
 			break;
 		}
-		std::cout << "Repeat?" << std::endl << "Yes(Y) or Not(N)?" << std::endl;
-		std::cin >> request;
-		std::cout << std::endl << std::endl;
-	} while (request != "N" && request != "n");
+		if (n == 1 && i < line.length())
+		{
+			first += line[i];
+		}
+		else if (n == 2 && i < line.length())
+		{
+			second += line[i];
+		}
+	}
 }
-void Product::getnamefile(std::string &namefile)
+void Product::clearmap()
 {
-	std::cout << "Enter the file name:";
-	std::cin >> namefile;
-	namefile += ".txt";
+	specific.clear();
+}
+void Product::getmap()
+{
+	std::map<std::string, std::string >::iterator it;
+	for (it = specific.begin(); it != specific.end(); it++)
+	{
+		std::cout<< it->first << "(" << it->second << ")" << " | ";
+	}
+	std::cout << std::endl;
 }
