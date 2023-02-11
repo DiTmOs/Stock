@@ -2,12 +2,7 @@
 #include <fstream>
 #include <iostream>
 
-void Stock::addinfile(std::string namefile)
-{
-	Product temp;
-	temp.putInfile(namefile);
-	listObjects.push_back(temp);
-}
+
 void Stock::checkwareh(std::string namefile)
 {
 	Product temp;
@@ -28,4 +23,8 @@ void Stock::checkwareh(std::string namefile)
 	{
 		listObjects[i].getmap();
 	}
+}
+void Stock::inputStock(Product input)
+{
+	listObjects.push_back(input);
 }

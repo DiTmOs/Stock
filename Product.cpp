@@ -1,11 +1,12 @@
 #include "Product.h"
 #include <fstream>
 #include <cctype>
+#include <ctime>
+
 
 void Product::putInfile(std::string namefile)
 {
 	std::ofstream fin;
-	getdate();
 	std::map<std::string, std::string>::iterator it = specific.begin();
 	fin.open(namefile,std::ios::app | std::ios::ate);
 	for (it ; it != specific.end(); it++)
@@ -16,19 +17,17 @@ void Product::putInfile(std::string namefile)
 	fin.close();
 	std::cout << "The recording has passed!" << std::endl;
 }
-void Product::getdate()
+void Product::getdate(std::string first, std::string second)
 {
-	std::string request,first,second;
-	do
-	{
-		std::cout << "Enter a category:";
-		std::cin >> first;
-		std::cout << "Enter its value:";
-		std::cin >> second;
-		specific[first] = second;
-		std::cout << std::endl << "Add another category?" << std::endl << "Yes(Y) or Not(N)" <<std::endl;
-		std::cin >> request;
-	} while (request != "N" && request != "n");
+	specific[first] = second;
+}
+void Product::inputID()
+{
+	double temp;
+	temp = rand();
+	std::string number = std::to_string(temp);
+	srand(time(NULL));
+	specific["Zid"] = number;
 }
 void Product::readline(std::string line)
 {

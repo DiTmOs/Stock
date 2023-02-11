@@ -3,3 +3,6 @@ pop:sela;years:1987;
 car:nissan;
 home:Nevskiy;
 dota:6500;pusi:fucking;
+avto:vas_2106;year:1996;
+Zid:;geli:2015;sea:dark;
+Zid:41.000000;gaz:50;

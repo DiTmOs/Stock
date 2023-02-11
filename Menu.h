@@ -8,5 +8,6 @@ public:
 	void menu();
 private:
 	Stock one;
+	Product two;
 	std::string namefile;
 };
