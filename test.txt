@@ -1,8 +1,3 @@
-glass:power;kont:15;
-pop:sela;years:1987;
-car:nissan;
-home:Nevskiy;
-dota:6500;pusi:fucking;
-avto:vas_2106;year:1996;
-Zid:ù;geli:2015;sea:dark;
-Zid:41.000000;gaz:50;
+
+Zid:18705;avto:2006;year:1996;
+Zid:18833;hope:avoid;people:dont;

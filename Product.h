@@ -11,6 +11,7 @@ public:
 	void clearmap();
 	void getmap();
 	void inputID();
+	bool checkZID(std::string checkname);
 private:
 	std::map<std::string, std::string> specific;
 };

@@ -6,6 +6,8 @@ class Menu
 public:
 	void getnamefile();
 	void menu();
+	void addProd();
+	void editing();
 private:
 	Stock one;
 	Product two;

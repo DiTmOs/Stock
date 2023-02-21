@@ -23,11 +23,11 @@ void Product::getdate(std::string first, std::string second)
 }
 void Product::inputID()
 {
-	double temp;
+	srand(time(NULL));
+	int temp;
 	temp = rand();
 	std::string number = std::to_string(temp);
-	srand(time(NULL));
-	specific["Zid"] = number;
+	specific["ZID"] = number;
 }
 void Product::readline(std::string line)
 {
@@ -71,4 +71,11 @@ void Product::getmap()
 		std::cout<< it->first << "(" << it->second << ")" << " | ";
 	}
 	std::cout << std::endl;
+}
+bool Product::checkZID(std::string checkname)
+{
+	if (checkname == specific["ZID"])
+		return true;
+	else
+		return false;
 }

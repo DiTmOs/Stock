@@ -9,7 +9,7 @@ void Menu::menu()
 {
 	getnamefile();
 	std::cout << "---------------------------------------------------" << std::endl;
-	std::string request,first,second,temp("Y"),editing;
+	std::string request;
 	do
 	{
 		std::cout << "---------------------------------------------------" << std::endl;
@@ -24,28 +24,14 @@ void Menu::menu()
 		switch (request[0])
 		{
 		case '1':
-			do
-			{
-				std::cout << "Enter the category: ";
-				std::cin >> first;
-				std::cout << "Enter its weight: ";
-				std::cin >> second;
-				two.getdate(first, second);
-				std::cout << "Add more ? (Yes(Y) or Not(N))"<<std::endl;
-				std::cin >> temp;
-			} while (temp != "n" && temp != "N");
-			two.inputID();
-			two.putInfile(namefile);
+			addProd();
 			//one.inputStock(two);
-			two.clearmap();
 			break;
 		case '2':
 			one.checkwareh(namefile);
 			break;
 		case '3':
-			one.checkwareh(namefile);
-			std::cout << "Which one: ";
-			std::cin >> editing;
+			editing();
 			break;
 		case '5':
 			break;
@@ -54,4 +40,49 @@ void Menu::menu()
 			break;
 		}
 	} while (request != "5");
+}
+void Menu::addProd()
+{
+	std::string first, second,temp("Y");
+	do {
+		std::cout << "Enter the category: ";
+		std::cin >> first;
+		std::cout << "Enter its weight: ";
+		std::cin >> second;
+		two.getdate(first, second);
+		std::cout << "Add more ? (Yes(Y) or Not(N))" << std::endl;
+		std::cin >> temp;
+	} while (temp != "N" && temp != "n");
+	two.inputID();
+	two.putInfile(namefile);
+	two.clearmap();
+}
+void Menu::editing()
+{
+	int number;
+	std::string zidedit,select, newperem;
+	one.checkwareh(namefile);
+	std::cout << "Which one(enter number ZID): ";
+	std::cin >> zidedit;
+	two = one.check(zidedit);
+	std::cout << std::endl;
+	two.getmap();
+	std::cout << std::endl << "Select a category: ";
+	std::cin >> select;
+	std::cout << "What is chanding:" << std::endl;
+	std::cout << "1) The category." << std::endl;
+	std::cout << "2) The weight." << std::endl;
+	std::cout << "3) All." << std::endl;
+	std::cin >> number;
+	std::cout << "Enter a new:";
+	std::cin >> newperem;
+	switch (number)
+	{
+	case 1:
+
+		break;
+	case 2:
+		two.getdate(select, newperem);
+		break;
+	}
 }
